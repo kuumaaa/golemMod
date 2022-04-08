@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "vanillagolems:item/test_item"
+  }
+
+
+}
