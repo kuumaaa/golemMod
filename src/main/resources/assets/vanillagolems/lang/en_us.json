@@ -1,3 +1,6 @@
 {
-  "item.vanillagolems.test_item": "Test Item"
+  "item.vanillagolems.test_item": "Test Item",
+
+
+  "block.vanillagolems.test_block": "Test Block"
 }
