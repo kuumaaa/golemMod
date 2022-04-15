@@ -13,23 +13,16 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, VanillaGolems.MOD_ID);
 
-    public static final RegistryObject<Item> testItem = ITEMS.register("test_item",
-            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-
-
-
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
 
 
 
+    //// CUSTOM ITEMS
 
-
-
-
-
-
+    public static final RegistryObject<Item> testItem = ITEMS.register("test_item",
+            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
 }

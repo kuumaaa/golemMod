@@ -1,6 +1,7 @@
 package com.kuuma.vanillagolems;
 
 import com.kuuma.vanillagolems.block.ModBlocks;
+import com.kuuma.vanillagolems.entity.ModEntityTypes;
 import com.kuuma.vanillagolems.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Block;
@@ -38,6 +39,7 @@ public class VanillaGolems
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
 
         modEventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading

@@ -2,5 +2,7 @@
   "item.vanillagolems.test_item": "Test Item",
 
 
-  "block.vanillagolems.test_block": "Test Block"
+  "block.vanillagolems.test_block": "Test Block",
+
+  "entity.vanillagolems.buff_zombie": "Buff Zombie"
 }
