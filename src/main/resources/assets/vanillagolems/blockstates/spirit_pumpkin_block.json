@@ -1,6 +1,5 @@
 {
   "variants": {
-    "": { "model":  "vanillagolems:block/spirit_pumpkin_block"  }
-
+    "": { "model":  "vanillagolems:block/spirit_pumpkin_block"}
   }
 }

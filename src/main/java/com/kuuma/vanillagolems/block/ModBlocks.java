@@ -24,6 +24,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> test_block = registerBlock("test_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.CACTUS).instabreak()), CreativeModeTab.TAB_MISC);
 
+    public static final RegistryObject<Block> spirit_pumpkin_block = registerBlock("spirit_pumpkin_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.SPONGE)), CreativeModeTab.TAB_MISC);
+
 
 
 
