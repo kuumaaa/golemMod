@@ -14,5 +14,8 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntityTypes.BUFF_ZOMBIE.get(), BuffZombieEntity.setCustomAttributes().build());
+        event.put(ModEntityTypes.OBSIDIAN_GOLEM.get(), BuffZombieEntity.setCustomAttributes().build());
     }
+
+
 }
