@@ -21,11 +21,10 @@ public class ObsidianGolemEntity extends IronGolem {
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 100.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MAX_HEALTH, 150.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.30D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
-                .add(Attributes.ATTACK_DAMAGE, 15.0D)
-                .add(Attributes.ATTACK_KNOCKBACK, 10000).build();
+                .add(Attributes.ATTACK_DAMAGE, 20.0D).build();
     }
 
     public boolean isOnFire() {
