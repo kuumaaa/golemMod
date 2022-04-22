@@ -1,5 +1,8 @@
 package com.kuuma.vanillagolems.entity.custom;
 
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -16,14 +19,29 @@ public class ObsidianGolemEntity extends IronGolem {
     }
 
 
-
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.33D)
-                .add(Attributes.ATTACK_DAMAGE, 13.0D)
-                .add(Attributes.FOLLOW_RANGE, 50.0D)
-                .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
+                .add(Attributes.MAX_HEALTH, 100.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
+                .add(Attributes.ATTACK_DAMAGE, 15.0D)
+                .add(Attributes.ATTACK_KNOCKBACK, 10000).build();
+    }
+
+    public boolean isOnFire() {
+        return false;
+    }
+
+    public float getBrightness() {
+        return 2.0F;
+    }
+
+    protected ParticleOptions getParticleType() {
+        return ParticleTypes.DRIPPING_OBSIDIAN_TEAR;
+    }
+
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+        return false;
     }
 
 

@@ -37,7 +37,7 @@ public class ModEntityTypes {
 
 
     public static final RegistryObject<EntityType<ObsidianGolemEntity>> OBSIDIAN_GOLEM = ENTITY_TYPES.register(OBSIDIAN_GOLEM_ID,
-            () -> EntityType.Builder.of(ObsidianGolemEntity::new, MobCategory.CREATURE).sized(5f, 10f)
+            () -> EntityType.Builder.of(ObsidianGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f).fireImmune()
                     .build(new ResourceLocation(VanillaGolems.MOD_ID, OBSIDIAN_GOLEM_ID).toString()));
 
 
