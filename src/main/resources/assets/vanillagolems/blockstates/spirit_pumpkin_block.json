@@ -1,5 +1,20 @@
+
 {
   "variants": {
-    "": { "model":  "vanillagolems:block/spirit_pumpkin_block"}
+    "facing=east": {
+      "model":  "vanillagolems:block/spirit_pumpkin_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model":  "vanillagolems:block/spirit_pumpkin_block"
+    },
+    "facing=south": {
+      "model":  "vanillagolems:block/spirit_pumpkin_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model":  "vanillagolems:block/spirit_pumpkin_block",
+      "y": 270
+    }
   }
 }

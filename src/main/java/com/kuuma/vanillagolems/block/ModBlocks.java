@@ -1,6 +1,7 @@
 package com.kuuma.vanillagolems.block;
 
 import com.kuuma.vanillagolems.VanillaGolems;
+import com.kuuma.vanillagolems.block.custom.SpiritPumpkinBlock;
 import com.kuuma.vanillagolems.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -24,8 +25,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> test_block = registerBlock("test_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.CACTUS).instabreak()), CreativeModeTab.TAB_MISC);
 
-    public static final RegistryObject<Block> spirit_pumpkin_block = registerBlock("spirit_pumpkin_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.SPONGE)), CreativeModeTab.TAB_MISC);
+    public static final RegistryObject<Block> SPIRIT_PUMPKIN_BLOCK = registerBlock("spirit_pumpkin_block",
+            () -> new SpiritPumpkinBlock(BlockBehaviour.Properties.of(Material.SPONGE)), CreativeModeTab.TAB_MISC);
 
 
 
