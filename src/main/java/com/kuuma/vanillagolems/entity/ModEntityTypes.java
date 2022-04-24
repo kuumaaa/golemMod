@@ -3,10 +3,10 @@ package com.kuuma.vanillagolems.entity;
 import com.kuuma.vanillagolems.VanillaGolems;
 import com.kuuma.vanillagolems.entity.custom.BuffZombieEntity;
 import com.kuuma.vanillagolems.entity.custom.ObsidianGolemEntity;
+import com.kuuma.vanillagolems.entity.custom.IceGolemEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,6 +24,7 @@ public class ModEntityTypes {
     }
 
     public static final String OBSIDIAN_GOLEM_ID = "obsidian_golem";
+    public static final String ICE_GOLEM_ID = "ice_golem";
 
 
 
@@ -39,6 +40,10 @@ public class ModEntityTypes {
     public static final RegistryObject<EntityType<ObsidianGolemEntity>> OBSIDIAN_GOLEM = ENTITY_TYPES.register(OBSIDIAN_GOLEM_ID,
             () -> EntityType.Builder.of(ObsidianGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f).fireImmune()
                     .build(new ResourceLocation(VanillaGolems.MOD_ID, OBSIDIAN_GOLEM_ID).toString()));
+
+    public static final RegistryObject<EntityType<IceGolemEntity>> ICE_GOLEM = ENTITY_TYPES.register(ICE_GOLEM_ID,
+            () -> EntityType.Builder.of(IceGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f)
+                    .build(new ResourceLocation(VanillaGolems.MOD_ID, ICE_GOLEM_ID).toString()));
 
 
 }
