@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:pumpkin"
+          "name": "vanillagolems:spirit_pumpkin_block"
         }
       ],
       "conditions": [
