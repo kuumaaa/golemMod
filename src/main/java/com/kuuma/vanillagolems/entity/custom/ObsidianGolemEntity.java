@@ -42,5 +42,9 @@ public class ObsidianGolemEntity extends IronGolem {
         return false;
     }
 
+    public void aiStep() {
+        this.level.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, this.getRandomX(0.3D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+        super.aiStep();
+    }
 
 }
