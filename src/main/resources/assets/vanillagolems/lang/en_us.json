@@ -6,5 +6,6 @@
 
   "entity.vanillagolems.buff_zombie": "Buff Zombie",
   "entity.vanillagolems.obsidian_golem": "Obsidian Golem",
-  "entity.vanillagolems.snow_golem": "Snow Golem"
+  "entity.vanillagolems.snow_golem": "Snow Golem",
+  "entity.vanillagolems.fire_golem": "Fire Golem"
 }

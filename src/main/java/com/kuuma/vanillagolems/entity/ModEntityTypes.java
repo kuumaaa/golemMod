@@ -2,6 +2,7 @@ package com.kuuma.vanillagolems.entity;
 
 import com.kuuma.vanillagolems.VanillaGolems;
 import com.kuuma.vanillagolems.entity.custom.BuffZombieEntity;
+import com.kuuma.vanillagolems.entity.custom.FireGolemEntity;
 import com.kuuma.vanillagolems.entity.custom.ObsidianGolemEntity;
 import com.kuuma.vanillagolems.entity.custom.IceGolemEntity;
 import net.minecraft.resources.ResourceLocation;
@@ -25,6 +26,7 @@ public class ModEntityTypes {
 
     public static final String OBSIDIAN_GOLEM_ID = "obsidian_golem";
     public static final String ICE_GOLEM_ID = "ice_golem";
+    public static final String FIRE_GOLEM_ID = "fire_golem";
 
 
 
@@ -44,6 +46,10 @@ public class ModEntityTypes {
     public static final RegistryObject<EntityType<IceGolemEntity>> ICE_GOLEM = ENTITY_TYPES.register(ICE_GOLEM_ID,
             () -> EntityType.Builder.of(IceGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f)
                     .build(new ResourceLocation(VanillaGolems.MOD_ID, ICE_GOLEM_ID).toString()));
+
+    public static final RegistryObject<EntityType<FireGolemEntity>> FIRE_GOLEM = ENTITY_TYPES.register(FIRE_GOLEM_ID,
+            () -> EntityType.Builder.of(FireGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f)
+                    .build(new ResourceLocation(VanillaGolems.MOD_ID, FIRE_GOLEM_ID).toString()));
 
 
 }

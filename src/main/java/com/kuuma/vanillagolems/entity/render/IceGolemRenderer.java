@@ -6,7 +6,6 @@ import com.kuuma.vanillagolems.entity.model.IceGolemModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.IronGolem;
 
 public class IceGolemRenderer extends MobRenderer<IceGolemEntity, IceGolemModel<IceGolemEntity>> {
 

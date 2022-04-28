@@ -7,16 +7,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.level.Level;
 
-public class ObsidianGolemEntity extends IronGolem {
-
-
-    public ObsidianGolemEntity(EntityType<? extends IronGolem> type, Level worldIn) {
-        super(type, worldIn);
+public class FireGolemEntity extends SnowGolem {
+    public FireGolemEntity(EntityType<? extends SnowGolem> p_29902_, Level p_29903_) {
+        super(p_29902_, p_29903_);
     }
-
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
@@ -31,16 +28,15 @@ public class ObsidianGolemEntity extends IronGolem {
     }
 
     public float getBrightness() {
-        return 2.0F;
+        return 10.0F;
     }
 
     protected ParticleOptions getParticleType() {
-        return ParticleTypes.DRIPPING_OBSIDIAN_TEAR;
+        return ParticleTypes.SMOKE;
     }
 
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
         return false;
     }
-
 
 }
