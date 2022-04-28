@@ -45,8 +45,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class FireGolemEntity extends SnowGolem {
-    private int noJumpDelay = 0;
     private static final EntityDataAccessor<Byte> DATA_PUMPKIN_ID = SynchedEntityData.defineId(FireGolemEntity.class, EntityDataSerializers.BYTE);
+    private int noJumpDelay = 0;
     private static final byte PUMPKIN_FLAG = 16;
 
     public FireGolemEntity(EntityType<? extends SnowGolem> p_29902_, Level p_29903_) {
@@ -71,6 +71,15 @@ public class FireGolemEntity extends SnowGolem {
         }));
     }
 
+    public void setPumpkin(boolean pPumpkinEquipped) {
+        byte b0 = this.entityData.get(DATA_PUMPKIN_ID);
+        if (pPumpkinEquipped) {
+            return;
+        } else {
+            this.entityData.set(DATA_PUMPKIN_ID, (byte)(b0 & -17));
+        }
+    }
+
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_PUMPKIN_ID, (byte)16);
@@ -81,40 +90,16 @@ public class FireGolemEntity extends SnowGolem {
         pCompound.putBoolean("Pumpkin", this.hasPumpkin());
     }
 
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        if (pCompound.contains("Pumpkin")) {
-            this.setPumpkin(pCompound.getBoolean("Pumpkin"));
-        }
 
-    }
 
-    public void shear(SoundSource pCategory) {
-        this.level.playSound((Player)null, this, SoundEvents.SNOW_GOLEM_SHEAR, pCategory, 1.0F, 1.0F);
-        if (!this.level.isClientSide()) {
-            this.setPumpkin(false);
-            this.spawnAtLocation(new ItemStack(Items.CARVED_PUMPKIN), 1.7F);
-        }
 
-    }
+
 
     public boolean readyForShearing() {
         return this.isAlive() && this.hasPumpkin();
     }
 
-    public boolean hasPumpkin() {
-        return (this.entityData.get(DATA_PUMPKIN_ID) & 16) != 0;
-    }
 
-    public void setPumpkin(boolean pPumpkinEquipped) {
-        byte b0 = this.entityData.get(DATA_PUMPKIN_ID);
-        if (pPumpkinEquipped) {
-            this.entityData.set(DATA_PUMPKIN_ID, (byte)(b0 | 16));
-        } else {
-            this.entityData.set(DATA_PUMPKIN_ID, (byte)(b0 & -17));
-        }
-
-    }
 
     public boolean isOnFire() {
         return false;

@@ -2,6 +2,7 @@ package com.kuuma.vanillagolems.block.custom;
 
 
 import com.kuuma.vanillagolems.entity.ModEntityTypes;
+import com.kuuma.vanillagolems.entity.custom.FireGolemEntity;
 import com.kuuma.vanillagolems.entity.custom.ObsidianGolemEntity;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -33,6 +34,10 @@ import java.util.function.Predicate;
 
 public class SpiritPumpkinBlock extends HorizontalDirectionalBlock implements Wearable {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    @Nullable
+    private BlockPattern fireGolemBase;
+    @Nullable
+    private BlockPattern fireGolemFull;
     @Nullable
     private BlockPattern obsidianGolemBase;
     @Nullable
@@ -66,17 +71,15 @@ public class SpiritPumpkinBlock extends HorizontalDirectionalBlock implements We
     }
 
     public boolean canSpawnGolem(LevelReader pLevel, BlockPos pPos) {
-        return this.getOrCreateIronGolemBase().find(pLevel, pPos) != null;
+        return this.getOrCreateObsidianGolemBase().find(pLevel, pPos) != null;
     }
 
     private void trySpawnGolem(Level pLevel, BlockPos pPos) {
-        BlockPattern.BlockPatternMatch blockpattern$blockpatternmatch = this.getOrCreateIronGolemFull().find(pLevel, pPos);
+        BlockPattern.BlockPatternMatch blockpattern$blockpatternmatch = this.getOrCreateObsidianGolemFull().find(pLevel, pPos);
 
-        if(blockpattern$blockpatternmatch != null)
-        {
             if (blockpattern$blockpatternmatch != null) {
-                for(int j = 0; j < this.getOrCreateIronGolemFull().getWidth(); ++j) {
-                    for(int k = 0; k < this.getOrCreateIronGolemFull().getHeight(); ++k) {
+                for(int j = 0; j < this.getOrCreateObsidianGolemFull().getWidth(); ++j) {
+                    for(int k = 0; k < this.getOrCreateObsidianGolemFull().getHeight(); ++k) {
                         BlockInWorld blockinworld2 = blockpattern$blockpatternmatch.getBlock(j, k, 0);
                         pLevel.setBlock(blockinworld2.getPos(), Blocks.AIR.defaultBlockState(), 2);
                         pLevel.levelEvent(2001, blockinworld2.getPos(), Block.getId(blockinworld2.getState()));
@@ -93,14 +96,34 @@ public class SpiritPumpkinBlock extends HorizontalDirectionalBlock implements We
                     CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayer1, obsidiangolem);
                 }
 
-                for(int i1 = 0; i1 < this.getOrCreateIronGolemFull().getWidth(); ++i1) {
-                    for(int j1 = 0; j1 < this.getOrCreateIronGolemFull().getHeight(); ++j1) {
+                for(int i1 = 0; i1 < this.getOrCreateObsidianGolemFull().getWidth(); ++i1) {
+                    for(int j1 = 0; j1 < this.getOrCreateObsidianGolemFull().getHeight(); ++j1) {
                         BlockInWorld blockinworld1 = blockpattern$blockpatternmatch.getBlock(i1, j1, 0);
                         pLevel.blockUpdated(blockinworld1.getPos(), Blocks.AIR);
                     }
                 }
+            } else {
+                blockpattern$blockpatternmatch = this.getOrCreateFireGolemFull().find(pLevel, pPos);
+                    for(int i = 0; i < this.getOrCreateFireGolemFull().getHeight(); ++i) {
+                        BlockInWorld blockinworld = blockpattern$blockpatternmatch.getBlock(0, i, 0);
+                        pLevel.setBlock(blockinworld.getPos(), Blocks.AIR.defaultBlockState(), 2);
+                        pLevel.levelEvent(2001, blockinworld.getPos(), Block.getId(blockinworld.getState()));
+                    }
+
+                    FireGolemEntity fireGolem = ModEntityTypes.FIRE_GOLEM.get().create(pLevel);
+                    BlockPos blockpos1 = blockpattern$blockpatternmatch.getBlock(0, 2, 0).getPos();
+                    fireGolem.moveTo((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.05D, (double)blockpos1.getZ() + 0.5D, 0.0F, 0.0F);
+                    pLevel.addFreshEntity(fireGolem);
+
+                    for(ServerPlayer serverplayer : pLevel.getEntitiesOfClass(ServerPlayer.class, fireGolem.getBoundingBox().inflate(5.0D))) {
+                        CriteriaTriggers.SUMMONED_ENTITY.trigger(serverplayer, fireGolem);
+                    }
+
+                    for(int l = 0; l < this.getOrCreateFireGolemFull().getHeight(); ++l) {
+                        BlockInWorld blockinworld3 = blockpattern$blockpatternmatch.getBlock(0, l, 0);
+                        pLevel.blockUpdated(blockinworld3.getPos(), Blocks.AIR);
+                    }
             }
-        }
 
     }
 
@@ -112,7 +135,7 @@ public class SpiritPumpkinBlock extends HorizontalDirectionalBlock implements We
         pBuilder.add(FACING);
     }
 
-    private BlockPattern getOrCreateIronGolemBase() {
+    private BlockPattern getOrCreateObsidianGolemBase() {
         if (this.obsidianGolemBase == null) {
             this.obsidianGolemBase = BlockPatternBuilder.start().aisle("~ ~", "###", "~#~").where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.CRYING_OBSIDIAN))).where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR))).build();
         }
@@ -120,11 +143,30 @@ public class SpiritPumpkinBlock extends HorizontalDirectionalBlock implements We
         return this.obsidianGolemBase;
     }
 
-    private BlockPattern getOrCreateIronGolemFull() {
+    private BlockPattern getOrCreateObsidianGolemFull() {
         if (this.obsidianGolemFull == null) {
             this.obsidianGolemFull = BlockPatternBuilder.start().aisle("~^~", "###", "~#~").where('^', BlockInWorld.hasState(PUMPKINS_PREDICATE)).where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.CRYING_OBSIDIAN))).where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR))).build();
         }
 
         return this.obsidianGolemFull;
+    }
+
+
+
+
+    private BlockPattern getOrCreateFireGolemBase() {
+        if (this.fireGolemBase == null) {
+            this.fireGolemBase = BlockPatternBuilder.start().aisle(" ", "#", "#").where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.GILDED_BLACKSTONE))).build();
+        }
+
+        return this.fireGolemBase;
+    }
+
+    private BlockPattern getOrCreateFireGolemFull() {
+        if (this.fireGolemFull == null) {
+            this.fireGolemFull = BlockPatternBuilder.start().aisle("^", "#", "#").where('^', BlockInWorld.hasState(PUMPKINS_PREDICATE)).where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.GILDED_BLACKSTONE))).build();
+        }
+
+        return this.fireGolemFull;
     }
 }
