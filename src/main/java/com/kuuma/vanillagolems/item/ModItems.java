@@ -20,9 +20,9 @@ public class ModItems {
 
 
     //// CUSTOM ITEMS
-
+/*
     public static final RegistryObject<Item> testItem = ITEMS.register("test_item",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-
+*/
 }

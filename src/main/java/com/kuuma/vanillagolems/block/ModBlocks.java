@@ -3,7 +3,6 @@ package com.kuuma.vanillagolems.block;
 import com.kuuma.vanillagolems.VanillaGolems;
 import com.kuuma.vanillagolems.block.custom.SpiritPumpkinBlock;
 import com.kuuma.vanillagolems.item.ModItems;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -22,14 +21,9 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, VanillaGolems.MOD_ID);
 
 
-    public static final RegistryObject<Block> test_block = registerBlock("test_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CACTUS).instabreak()), CreativeModeTab.TAB_MISC);
 
     public static final RegistryObject<Block> SPIRIT_PUMPKIN_BLOCK = registerBlock("spirit_pumpkin_block",
             () -> new SpiritPumpkinBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(1f)), CreativeModeTab.TAB_MISC);
-
-
-
 
 
 
@@ -42,7 +36,6 @@ public class ModBlocks {
 
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
-
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
     }
 

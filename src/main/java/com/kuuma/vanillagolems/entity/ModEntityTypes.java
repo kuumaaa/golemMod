@@ -1,7 +1,6 @@
 package com.kuuma.vanillagolems.entity;
 
 import com.kuuma.vanillagolems.VanillaGolems;
-import com.kuuma.vanillagolems.entity.custom.BuffZombieEntity;
 import com.kuuma.vanillagolems.entity.custom.FireGolemEntity;
 import com.kuuma.vanillagolems.entity.custom.ObsidianGolemEntity;
 import com.kuuma.vanillagolems.entity.custom.IceGolemEntity;
@@ -31,11 +30,6 @@ public class ModEntityTypes {
 
 
     //// CUSTOM ENTITIES
-
-    public static final RegistryObject<EntityType<BuffZombieEntity>> BUFF_ZOMBIE = ENTITY_TYPES.register("buff_zombie",
-            () -> EntityType.Builder.of(BuffZombieEntity::new, MobCategory.MONSTER)
-                    .sized(1f,3f)
-                    .build(new ResourceLocation(VanillaGolems.MOD_ID,"buff_zombie").toString()));
 
 
 
