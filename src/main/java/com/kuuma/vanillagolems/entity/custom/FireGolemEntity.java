@@ -4,7 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -42,6 +46,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class FireGolemEntity extends SnowGolem {
     private int noJumpDelay = 0;
+    private static final EntityDataAccessor<Byte> DATA_PUMPKIN_ID = SynchedEntityData.defineId(FireGolemEntity.class, EntityDataSerializers.BYTE);
+    private static final byte PUMPKIN_FLAG = 16;
 
     public FireGolemEntity(EntityType<? extends SnowGolem> p_29902_, Level p_29903_) {
         super(p_29902_, p_29903_);
@@ -56,13 +62,18 @@ public class FireGolemEntity extends SnowGolem {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 2D, 2, 30.0F));
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 2D, 4, 30.0F));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D, 1.0000001E-5F));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Mob.class, 10, true, false, (p_29932_) -> {
             return p_29932_ instanceof Enemy;
         }));
+    }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_PUMPKIN_ID, (byte)16);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -74,6 +85,33 @@ public class FireGolemEntity extends SnowGolem {
         super.readAdditionalSaveData(pCompound);
         if (pCompound.contains("Pumpkin")) {
             this.setPumpkin(pCompound.getBoolean("Pumpkin"));
+        }
+
+    }
+
+    public void shear(SoundSource pCategory) {
+        this.level.playSound((Player)null, this, SoundEvents.SNOW_GOLEM_SHEAR, pCategory, 1.0F, 1.0F);
+        if (!this.level.isClientSide()) {
+            this.setPumpkin(false);
+            this.spawnAtLocation(new ItemStack(Items.CARVED_PUMPKIN), 1.7F);
+        }
+
+    }
+
+    public boolean readyForShearing() {
+        return this.isAlive() && this.hasPumpkin();
+    }
+
+    public boolean hasPumpkin() {
+        return (this.entityData.get(DATA_PUMPKIN_ID) & 16) != 0;
+    }
+
+    public void setPumpkin(boolean pPumpkinEquipped) {
+        byte b0 = this.entityData.get(DATA_PUMPKIN_ID);
+        if (pPumpkinEquipped) {
+            this.entityData.set(DATA_PUMPKIN_ID, (byte)(b0 | 16));
+        } else {
+            this.entityData.set(DATA_PUMPKIN_ID, (byte)(b0 & -17));
         }
 
     }
@@ -109,6 +147,14 @@ public class FireGolemEntity extends SnowGolem {
     }
 
     public void aiStep() {
+        if (this.level.isClientSide) {
+            for(int i = 0; i < 2; ++i) {
+                this.level.addParticle(ParticleTypes.SMOKE, this.getRandomX(0.3D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(ParticleTypes.DRIPPING_LAVA, this.getRandomX(0.1D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+            }
+        }
+
+
         if (this.noJumpDelay > 0) {
             --this.noJumpDelay;
         }
