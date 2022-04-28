@@ -48,7 +48,7 @@ public class ModEntityTypes {
                     .build(new ResourceLocation(VanillaGolems.MOD_ID, ICE_GOLEM_ID).toString()));
 
     public static final RegistryObject<EntityType<FireGolemEntity>> FIRE_GOLEM = ENTITY_TYPES.register(FIRE_GOLEM_ID,
-            () -> EntityType.Builder.of(FireGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f)
+            () -> EntityType.Builder.of(FireGolemEntity::new, MobCategory.CREATURE).sized(1f, 2f).fireImmune()
                     .build(new ResourceLocation(VanillaGolems.MOD_ID, FIRE_GOLEM_ID).toString()));
 
 
