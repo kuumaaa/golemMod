@@ -23,7 +23,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> SPIRIT_PUMPKIN_BLOCK = registerBlock("spirit_pumpkin_block",
-            () -> new SpiritPumpkinBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(1f)), CreativeModeTab.TAB_MISC);
+            () -> new SpiritPumpkinBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(1f)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 
 
