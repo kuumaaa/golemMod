@@ -2,8 +2,6 @@ package com.kuuma.vanillagolems.entity.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -40,17 +38,16 @@ public class IceGolemEntity extends IronGolem implements ItemSteerable, Saddleab
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.POTATO, Items.BEETROOT);
     private final ItemBasedSteering steering = new ItemBasedSteering(this.entityData, DATA_BOOST_TIME, DATA_SADDLE_ID);
 
-
     public IceGolemEntity(EntityType<? extends IronGolem> type, Level worldIn) {
         super(type, worldIn);
     }
-
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 100.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D).build();
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
+                .add(Attributes.ATTACK_DAMAGE, 20).build();
     }
 
     protected void registerGoals() {
@@ -66,15 +63,10 @@ public class IceGolemEntity extends IronGolem implements ItemSteerable, Saddleab
         this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.2D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-
     }
 
     public float getBrightness() {
         return 2.0F;
-    }
-
-    protected ParticleOptions getParticleType() {
-        return ParticleTypes.SNOWFLAKE;
     }
 
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
@@ -130,7 +122,6 @@ public class IceGolemEntity extends IronGolem implements ItemSteerable, Saddleab
                     }
                 }
             }
-
             return super.getDismountLocationForPassenger(pLivingEntity);
         }
     }
@@ -166,8 +157,4 @@ public class IceGolemEntity extends IronGolem implements ItemSteerable, Saddleab
 
         return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON);
     }
-
-
-
-
 }
